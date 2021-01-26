@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0373800a4f1dae64eb227f6e0ed2c078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 11400000, guid: 9855ec780ddda24429ed68ef00dc7917, type: 2}
+  card: {fileID: 11400000, guid: 09cb86d74aca8c646a1829985896989a, type: 2}
   tooltip: {fileID: 415450152486088886}
   upperVal: {fileID: 415450150751386142}
   upperSymbl: {fileID: 415450151135071883}
