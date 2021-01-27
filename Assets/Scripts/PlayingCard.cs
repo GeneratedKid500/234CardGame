@@ -10,4 +10,10 @@ public class PlayingCard : ScriptableObject
     public Sprite cardType;
 
     public Sprite[] allCardTypes;
+
+    public void CardConstructor(string cardRank, Sprite cardClub)
+    {
+        cardValue = cardRank;
+        cardType = cardClub;
+    }
 }
