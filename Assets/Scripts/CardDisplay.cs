@@ -10,7 +10,6 @@ public class CardDisplay : MonoBehaviour
     public PlayingCard card;
 
     [Header ("Card Icons")]
-
     public Text tooltip;
 
     public Text upperVal;
@@ -21,22 +20,29 @@ public class CardDisplay : MonoBehaviour
 
     public Text cardCenter;
 
-    public static bool mouseIsOver;
+    [Header("Card Status")]
+    public Sprite cardBack;
+
 
     //system vars
+    Sprite cardFace;
     RectTransform rectT;
     Vector3 increasedSize;
     Vector3 originalSize;
+    string tToolTip;
+    bool faceDown = false;
 
     /// <summary>
-    /// START --- ASSIGNS VALUES
+    /// START --- GENERATES ASSIGNS VALUES TO DISPLAY
     /// </summary>
     void Start()
     {
         //asigning system variables
+        cardFace = GetComponent<Image>().sprite;
         rectT = gameObject.GetComponent<RectTransform>();
         increasedSize = new Vector3(1.2f, 1.2f, 1.2f);
         originalSize = rectT.localScale;
+
 
         //randomly generates card values
         GenCardVals();
@@ -59,6 +65,7 @@ public class CardDisplay : MonoBehaviour
         tooltip.gameObject.SetActive(false);
 
         cardCenter.text = card.cardValue + card.cardType.name[0].ToString();
+        FlipSet(faceDown);
     }
 
     /// <summary>
@@ -130,6 +137,44 @@ public class CardDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (tooltip.gameObject.activeSelf)
+        {
+            if (!faceDown)
+            {
+                SelectCard();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+                FlipSet(faceDown);
+        }
+    }
+
+    void FlipSet(bool BOOL)
+    {
+        if (cardCenter.gameObject.activeSelf == !BOOL)
+        {
+            cardCenter.gameObject.SetActive(BOOL);
+            upperVal.gameObject.SetActive(BOOL);
+            upperSymbl.gameObject.SetActive(BOOL);
+            lowerVal.gameObject.SetActive(BOOL);
+            lowerSymbl.gameObject.SetActive(BOOL);
+            if (BOOL)
+            {
+                GetComponent<Image>().sprite = cardFace;
+                tooltip.text = tToolTip;
+            }
+            else
+            {
+                GetComponent<Image>().sprite = cardBack;
+                tToolTip = tooltip.text; 
+                tooltip.text = "???";
+            }
+            faceDown = !faceDown;
+        }
+    }
+
+    void SelectCard()
+    {
         //increases card size if it is clicked on
         //card is "selected"GenCardVals()
         // if card is already selected, unselects
@@ -142,7 +187,6 @@ public class CardDisplay : MonoBehaviour
                 else
                     rectT.localScale = originalSize;
             }
-
         }
         //decreases size when elsewhere is clicked
         //card is "unselected"

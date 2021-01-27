@@ -457,6 +457,8 @@ MonoBehaviour:
   lowerVal: {fileID: 415450150942030226}
   lowerSymbl: {fileID: 415450151591886331}
   cardCenter: {fileID: 415450151228936678}
+  cardBack: {fileID: 21300000, guid: a0c88ae214e7dfb429499b2ec10c34ed, type: 3}
+  faceUp: 1
 --- !u!114 &249549197
 MonoBehaviour:
   m_ObjectHideFlags: 0
