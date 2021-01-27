@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d302e090742e2694a919d9f0d1f9f112, type: 3}
   m_Name: Clubs
   m_EditorClassIdentifier: 
-  cardValue: 5
+  cardValue: 9
   cardType: {fileID: -5196480314518052078, guid: 1379771bb8174114c91bf9efabdefcdb, type: 3}
   allCardTypes: []

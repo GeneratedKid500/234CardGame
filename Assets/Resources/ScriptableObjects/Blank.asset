@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d302e090742e2694a919d9f0d1f9f112, type: 3}
   m_Name: Blank
   m_EditorClassIdentifier: 
-  cardValue: 0
-  cardType: {fileID: 0}
+  cardValue: 9
+  cardType: {fileID: -5196480314518052078, guid: 1379771bb8174114c91bf9efabdefcdb, type: 3}
   allCardTypes:
   - {fileID: -5196480314518052078, guid: 1379771bb8174114c91bf9efabdefcdb, type: 3}
   - {fileID: -469525390435789673, guid: 1379771bb8174114c91bf9efabdefcdb, type: 3}

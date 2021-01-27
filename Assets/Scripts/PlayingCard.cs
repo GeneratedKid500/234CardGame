@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card")]
 public class PlayingCard : ScriptableObject
 {
-    public int cardValue;
+    public string cardValue;
 
     public Sprite cardType;
 
