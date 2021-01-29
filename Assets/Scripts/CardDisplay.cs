@@ -23,6 +23,8 @@ public class CardDisplay : MonoBehaviour
     [Header("Card Status")]
     public Sprite cardBack;
 
+    [Header("System")]
+    public AudioSource audioSource;
 
     //system vars
     Sprite cardFace;
@@ -30,6 +32,7 @@ public class CardDisplay : MonoBehaviour
     Vector3 increasedSize;
     Vector3 originalSize;
     string tToolTip;
+    float timer;
     bool faceDown = false;
 
     /// <summary>
@@ -38,44 +41,35 @@ public class CardDisplay : MonoBehaviour
     void Start()
     {
         //asigning system variables
+
         cardFace = GetComponent<Image>().sprite;
         rectT = gameObject.GetComponent<RectTransform>();
         increasedSize = new Vector3(1.2f, 1.2f, 1.2f);
         originalSize = rectT.localScale;
 
+        lowerVal.text = upperVal.text;
+        lowerSymbl.sprite = upperSymbl.sprite;
 
-        //randomly generates card values
-        GenCardVals();
-
-        if (card == null)
-        {
-            Debug.LogError("CARD HAS NO ASSIGNED CARD CLASS. EXITING APPLICATION");
-            Application.Quit();
-            return;
-        }
-
-        //assigning public vars in accordance with generated values 
-        upperVal.text = card.cardValue;
-        upperSymbl.sprite = card.cardType;
-
-        lowerVal.text = card.cardValue;
-        lowerSymbl.sprite = card.cardType;
-
-        AssignToolTip();
+        //AssignToolTip();
         tooltip.gameObject.SetActive(false);
 
+        //FlipSet(faceDown);
+    }
+
+    public void SetValsOnStart()
+    {
+        AssignCardJQK();
+        upperVal.text = card.cardValue;
+        upperSymbl.sprite = card.cardType;
         cardCenter.text = card.cardValue + card.cardType.name[0].ToString();
-        FlipSet(faceDown);
+        AssignToolTip();
     }
 
     /// <summary>
     /// RANDOMLY GENERATES CARD VALUES
     /// </summary>
-    void GenCardVals()
+    void AssignCardJQK()
     {
-        //assigning card number
-        card.cardValue = Random.Range(1, 14).ToString();
-
         //assigns card Aces, Jacks, Queens and Kings.
         switch (card.cardValue)
         {
@@ -95,12 +89,6 @@ public class CardDisplay : MonoBehaviour
             default:
                 break;
         }
-
-        //assigning card suit
-        //only does if the card's scriptable Object suit array slot is empty
-        // if it is empty then the card will have a predetermined suit rather than a random one
-        if (card.allCardTypes.Length > 0)
-            card.cardType = card.allCardTypes[Random.Range(0, card.allCardTypes.Length)];
     }
 
     /// <summary>
@@ -108,7 +96,7 @@ public class CardDisplay : MonoBehaviour
     /// </summary>
     void AssignToolTip()
     {
-        switch (card.cardValue)
+        switch (upperVal.text)
         {
             case "A":
                 tooltip.text = "Ace of " + card.cardType.name;
@@ -137,18 +125,35 @@ public class CardDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (tooltip.gameObject.activeSelf)
+        if (timer < 1)
         {
-            if (!faceDown)
+            timer += Time.deltaTime;
+            if (timer >= 1)
             {
-                SelectCard();
-            }
-
-            if (Input.GetMouseButtonDown(1))
                 FlipSet(faceDown);
+            }
+        }
+        else
+        {
+            //if mouse is hovering over card
+            if (tooltip.gameObject.activeSelf)
+            {
+                //if card is face up
+                if (!faceDown)
+                {
+                    SelectCard();
+                }
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    FlipSet(faceDown);
+                }
+            }
         }
     }
 
+    //flips the position of the card
+    //toggles the active state of the children (which display the information)
     void FlipSet(bool BOOL)
     {
         if (cardCenter.gameObject.activeSelf == !BOOL)
@@ -169,6 +174,7 @@ public class CardDisplay : MonoBehaviour
                 tToolTip = tooltip.text; 
                 tooltip.text = "???";
             }
+            audioSource.Play();
             faceDown = !faceDown;
         }
     }
