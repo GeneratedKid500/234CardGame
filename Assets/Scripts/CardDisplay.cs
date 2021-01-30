@@ -154,10 +154,10 @@ public class CardDisplay : MonoBehaviour
                 //if card is face up
                 if (!faceDown)
                 {
-                    SelectCard();
+                    //SelectCard();
                 }
 
-                if (Input.GetMouseButtonDown(1) && isEnabled)
+                if (Input.GetMouseButtonDown(0) && isEnabled)
                 {
                     FlipSet(faceDown);
                 }

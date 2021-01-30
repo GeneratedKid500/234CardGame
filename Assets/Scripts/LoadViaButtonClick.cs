@@ -11,12 +11,16 @@ public class LoadViaButtonClick : MonoBehaviour
     private void Start()
     {
         score.text = score.text + " " + MatchGameManager.score;
+
+        GetScore.SetLowScore();
     }
 
     public void Load(string level)
     {
         if (level == "Quit")
+        {
             Application.Quit();
+        }
         else if (level != null)
         {
             MatchGameManager.score = 0;
