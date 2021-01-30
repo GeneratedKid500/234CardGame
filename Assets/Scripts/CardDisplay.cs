@@ -123,7 +123,7 @@ public class CardDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// UPDATE --- SELECTS CARDS, 
+    /// UPDATE --- SELECTS CARDS, ENABLES CARDS
     /// </summary>
     private void Update()
     {
