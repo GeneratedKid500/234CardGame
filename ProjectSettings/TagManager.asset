@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainCanvas
   - 8CardSpawns
+  - Card
   layers:
   - Default
   - TransparentFX

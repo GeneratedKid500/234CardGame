@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.849987, y: 13.519989}
-  m_SizeDelta: {x: 17.347046, y: 23.230385}
+  m_AnchoredPosition: {x: -1.5, y: 13.3}
+  m_SizeDelta: {x: 22.528618, y: 23.230385}
   m_Pivot: {x: 0.3685446, y: 0.6957413}
 --- !u!222 &415450150751386143
 CanvasRenderer:
@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: 10
 --- !u!1 &415450150942030224
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,8 +113,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.849987, y: 13.519989}
-  m_SizeDelta: {x: 17.347046, y: 23.230385}
+  m_AnchoredPosition: {x: -2.2, y: 14.1}
+  m_SizeDelta: {x: 23.291676, y: 23.230385}
   m_Pivot: {x: 0.3685446, y: 0.6957413}
 --- !u!222 &415450150942030227
 CanvasRenderer:
@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: 10
 --- !u!1 &415450151122119737
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 1478968028072134436}
   m_Layer: 5
   m_Name: UICardTemplate
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -460,6 +460,8 @@ MonoBehaviour:
   cardCenter: {fileID: 415450151228936678}
   cardBack: {fileID: 21300000, guid: a0c88ae214e7dfb429499b2ec10c34ed, type: 3}
   audioSource: {fileID: 1478968028072134436}
+  matched: 0
+  disableAll: 0
 --- !u!114 &249549197
 MonoBehaviour:
   m_ObjectHideFlags: 0

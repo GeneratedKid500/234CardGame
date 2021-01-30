@@ -27,6 +27,7 @@ public class CardDisplay : MonoBehaviour
     public AudioSource audioSource;
 
     //system vars
+    MatchGameManager gameManager;
     Sprite cardFace;
     RectTransform rectT;
     Vector3 increasedSize;
@@ -34,6 +35,9 @@ public class CardDisplay : MonoBehaviour
     string tToolTip;
     float timer;
     bool faceDown = false;
+    bool isEnabled = true;
+    [HideInInspector] public bool matched = false;
+    [HideInInspector] public bool disableAll = false;
 
     /// <summary>
     /// START --- GENERATES ASSIGNS VALUES TO DISPLAY
@@ -41,7 +45,7 @@ public class CardDisplay : MonoBehaviour
     void Start()
     {
         //asigning system variables
-
+        gameManager = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<MatchGameManager>();
         cardFace = GetComponent<Image>().sprite;
         rectT = gameObject.GetComponent<RectTransform>();
         increasedSize = new Vector3(1.2f, 1.2f, 1.2f);
@@ -52,8 +56,6 @@ public class CardDisplay : MonoBehaviour
 
         //AssignToolTip();
         tooltip.gameObject.SetActive(false);
-
-        //FlipSet(faceDown);
     }
 
     public void SetValsOnStart()
@@ -125,6 +127,17 @@ public class CardDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (disableAll || matched)
+        {
+            if (isEnabled)
+                isEnabled = false;
+        }
+        else
+        {
+            if (!isEnabled)
+                isEnabled = true;
+        }
+
         if (timer < 1)
         {
             timer += Time.deltaTime;
@@ -144,7 +157,7 @@ public class CardDisplay : MonoBehaviour
                     SelectCard();
                 }
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(1) && isEnabled)
                 {
                     FlipSet(faceDown);
                 }
@@ -156,8 +169,6 @@ public class CardDisplay : MonoBehaviour
     //toggles the active state of the children (which display the information)
     void FlipSet(bool BOOL)
     {
-        if (cardCenter.gameObject.activeSelf == !BOOL)
-        {
             cardCenter.gameObject.SetActive(BOOL);
             upperVal.gameObject.SetActive(BOOL);
             upperSymbl.gameObject.SetActive(BOOL);
@@ -176,7 +187,16 @@ public class CardDisplay : MonoBehaviour
             }
             audioSource.Play();
             faceDown = !faceDown;
-        }
+
+            if (!faceDown)
+            {
+                gameManager.CardFlipped(this);
+            }
+            else
+            {
+                gameManager.UnselectCard(this);
+            }
+        
     }
 
     void SelectCard()
@@ -201,5 +221,10 @@ public class CardDisplay : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && rectT.localScale == increasedSize)
                 rectT.localScale = originalSize;
         }
+    }
+
+    public void publicFlip()
+    {
+        FlipSet(faceDown);
     }
 }
